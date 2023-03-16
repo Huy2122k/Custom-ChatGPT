@@ -88,8 +88,8 @@ async function getInformation(req, res) {
           },
           data: {
             prompt: message,
-            max_tokens: 100,
-            n: 1,
+            max_tokens: 512,
+            n: 2,
             stop: "",
             temperature: 0.5,
           },

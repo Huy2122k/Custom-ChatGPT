@@ -43,19 +43,34 @@ function App() {
     },
   });
   // Do something with the chatbot element
-  const baseurl = process.env.REACT_APP_URL;
-  console.log("base url " + baseurl);
+  // const baseurl = process.env.REACT_APP_URL;
+  // console.log("base url " + baseurl);
+  
+  const sendREQ = async (message) => {
+    const API_KEY = process.env.REACT_APP_IMAGES_KEY;
+    return axios({
+      method: "post",
+      url: "https://api.openai.com/v1/engines/text-davinci-003/completions",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      data: {
+        prompt: message,
+        max_tokens: 512,
+        n: 2,
+        stop: "",
+        temperature: 0.5,
+      },
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setChatLog([...chatLog, { chatPrompt: inputPrompt }]);
     async function callAPI() {
       try {
-        const response = await fetch(baseurl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: inputPrompt }),
-        });
+        const response = await sendREQ(inputPrompt);
         const data = await response.json();
         setChatLog([
           ...chatLog,
@@ -66,7 +81,7 @@ function App() {
         ]);
         setErr(false);
       } catch (err) {
-        setErr(err);
+        setErr({ message: "Could not generate text completion"});
       }
     }
     callAPI();
