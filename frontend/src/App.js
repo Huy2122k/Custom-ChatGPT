@@ -10,7 +10,7 @@ import NavLinks from "./components/NavLink";
 import BotResponse from "./components/BotResponse";
 import IntroSection from "./components/IntroSection";
 import { useSpeechRecognition } from "react-speech-kit";
-import { default as Speak } from "react-text-to-speech";
+// import { default as Speak } from "react-text-to-speech";
 import { BsMic } from "react-icons/bs";
 import axios from "axios";
 import GenerateImage from "./GenerateImage";
@@ -325,7 +325,7 @@ function App() {
                           <BotResponse response={chat.botMessage} />
 
                         <GenerateImage/>
-                          <Speak
+                          {/* <Speak
                             text={chat.botMessage}
                             startBtn={
                               <button  className="micPosition" >
@@ -337,7 +337,7 @@ function App() {
                                  <BsMicMuteFill/>
                               </button>
                             }
-                          />
+                          /> */}
                         </div>
                       ) : err ? (
                         <Error err={err} />
