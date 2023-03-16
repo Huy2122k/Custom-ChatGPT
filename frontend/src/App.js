@@ -324,7 +324,7 @@ function App() {
                           
                           <BotResponse response={chat.botMessage} />
 
-                        {/* <GenerateImage/> */}
+                        <GenerateImage/>
                           <Speak
                             text={chat.botMessage}
                             startBtn={
